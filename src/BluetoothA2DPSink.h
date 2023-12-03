@@ -150,6 +150,9 @@ class BluetoothA2DPSink : public BluetoothA2DPCommon {
     virtual void set_avrc_rn_playstatus_callback(void (*callback)(esp_avrc_playback_stat_t playback)) {
       this->avrc_rn_playstatus_callback = callback;
     }
+    virtual void set_avrc_rn_position_callback(void (*callback)(uint32_t position)) {
+      this->avrc_rn_position_callback = callback;
+    }    
 #endif
 
     /// Defines the method which will be called with the sample rate is updated
@@ -332,6 +335,7 @@ class BluetoothA2DPSink : public BluetoothA2DPCommon {
     void (*avrc_metadata_callback)(uint8_t, const uint8_t*) = nullptr;
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 0, 0)
     void (*avrc_rn_playstatus_callback)(esp_avrc_playback_stat_t) = nullptr;
+    void (*avrc_rn_position_callback)(uint32_t) = nullptr;    
 #endif
     void (*avrc_rn_volchg_complete_callback)(int) = nullptr;
     bool (*address_validator)(esp_bd_addr_t remote_bda) = nullptr;
